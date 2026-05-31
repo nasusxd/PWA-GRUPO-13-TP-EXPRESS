@@ -3,6 +3,7 @@ import express from 'express'
 import routes from './routes.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
+
 dotenv.config()
 
 const app = express()
@@ -20,15 +21,9 @@ app.get('/api/health', (req, res) => {
 
 const PORT = process.env.PORT
 
-try {
-    //await primsa.$connect()
-    app.listen(PORT, () => {
-        console.log('Servidor iniciado con exito', { url: `http://localhost:${PORT}` })
-    })
-} catch (error) {
-    if(error) {
-    console.log('Fallo la conexion de la base de datos', error)
-    } else {
-        console.log('Fallo la conexion de la base de datos con un error desconocido',error)
-    }
-}
+app.listen(PORT, () => {
+    console.log('Servidor iniciado con exito', { url: `http://localhost:${PORT}` })
+}).on('error', (error) => {
+    console.log('Fallo al iniciar el servidor', error)
+    process.exit(1)
+})

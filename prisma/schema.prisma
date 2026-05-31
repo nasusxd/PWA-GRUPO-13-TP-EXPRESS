@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tanque {
+  id           Int      @id @default(autoincrement())
+  nombre       String
+  tipo         String
+  descripcion  String?
+  creadoEn     DateTime @default(now())
+  modificadoEn DateTime @updatedAt
+}
