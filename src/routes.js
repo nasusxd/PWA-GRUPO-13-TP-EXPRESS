@@ -6,9 +6,9 @@ import validarTanque from './validarTanque.js'
 const router = Router();
 
 router.get("/tanques", async (req, res) => {
-    //const { search, tipo, page = 1, limit = 10 } = req.query;
+    const { search, tipo, page = 1, limit = 10 } = req.query;
     const tanques = await prisma.tanque.findMany({
-        /*where: {
+        where: {
             ...(search && {
                 nombre: {
                     contains: search,
@@ -18,9 +18,9 @@ router.get("/tanques", async (req, res) => {
             ...(tipo && {
                 tipo: tipo
             })
-        },*/
-        //skip: (Number(page) - 1) * Number(limit),
-        //take: Number(limit)
+        },
+        skip: (Number(page) - 1) * Number(limit),
+        take: Number(limit)
     });
     res.status(200).json({
         data: tanques
@@ -45,12 +45,12 @@ router.get("/tanques/:id", async (req, res) => {
 
 router.post("/tanques", async (req, res, next) => {
     try {
-    //const errores = validarTanque(req.body);
-    //if (errores.length > 0) {
-    //    return res.status(400).json({
-    //        error: errores
-    //    });
-    //}
+    const errores = validarTanque(req.body);
+    if (errores.length > 0) {
+        return res.status(400).json({
+            error: errores
+        });
+    }
     const tanque = await prisma.tanque.create({
             data: req.body
         });
@@ -69,12 +69,12 @@ router.post("/tanques", async (req, res, next) => {
 
 router.put("/tanques/:id", async (req, res) => {
     try{
-        //const errores = validarTanque(req.body);
-        //if (errores.length > 0) {
-        //    return res.status(400).json({
-        //        error: errores
-        //    });
-        //}
+        const errores = validarTanque(req.body);
+        if (errores.length > 0) {
+            return res.status(400).json({
+                error: errores
+            });
+        }
 
         const tanque = await prisma.tanque.update({
         where: {
