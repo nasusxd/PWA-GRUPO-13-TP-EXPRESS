@@ -35,3 +35,5 @@ app.listen(PORT, () => {
     console.log('Fallo al iniciar el servidor', error)
     process.exit(1)
 })
+
+module.exports = app;
