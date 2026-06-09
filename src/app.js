@@ -2,7 +2,7 @@ import express from 'express'
 import routes from './routes.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
-import middleswareError from './middleswareError.js'
+import middleswareError from './middlewares/middlewareError.js'
 
 dotenv.config()
 
