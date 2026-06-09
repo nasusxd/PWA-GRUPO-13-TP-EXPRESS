@@ -20,7 +20,8 @@
     "migrate:dev": "npx prisma migrate dev",
     "migrate:deploy": "npx prisma migrate deploy",
     "db:seed": "node prisma/seed.js",
-    "db:validate": "node prisma/validateDb.js"
+    "db:validate": "node prisma/validateDb.js",
+    "vercel-build": "prisma generate"
   },
   "dependencies": {
     "cors": "^2.8.6",
