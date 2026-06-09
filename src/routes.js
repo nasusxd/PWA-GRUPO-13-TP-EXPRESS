@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import prisma from './lib/prisma.js'
-import validarTanque from './validarTanque.js'
+import validarTanque from './validations/validarTanque.js'
 
 const router = Router();
 
