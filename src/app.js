@@ -8,7 +8,7 @@ dotenv.config()
 
 const app = express()
 app.use(cors({
-  origin: process.env.FRONTEND_URL,
+  origin: ['http://localhost:5173', 'https://pwa-grupo-13-tp-2.vercel.app'],
   credentials: false
 }));
 
