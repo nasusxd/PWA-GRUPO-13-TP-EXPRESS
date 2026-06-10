@@ -12,6 +12,7 @@ model Tanque {
   nombre       String
   tipo         String
   descripcion  String?
+  imagen     String?
   creadoEn     DateTime @default(now())
   modificadoEn DateTime @updatedAt
 }
