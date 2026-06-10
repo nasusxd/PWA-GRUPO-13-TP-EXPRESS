@@ -3,6 +3,8 @@ import routes from './routes.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import middleswareError from './middlewares/middlewareError.js'
+import swaggerUI from 'swagger-ui-express'
+import especificaciones from './swagger.js'
 
 dotenv.config()
 
@@ -14,6 +16,11 @@ app.use(cors({
 
 app.use(express.json())
 app.use('/', routes);
+app.use('/api-docs',swaggerUI.serve, swaggerUI.setup(especificaciones, {
+    swaggerOptions: {
+        url: '/swagger.json'
+    }
+}))
 
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok'})
