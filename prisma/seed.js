@@ -7,61 +7,61 @@ const data = [
         nombre: "Tiger I",
         tipo: "tanque de guerra",
         descripcion: "Tanque pesado alemán de la Segunda Guerra Mundial",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3f/Tiger_I_tank.jpg"
+        imagen: "https://tankmuseum.org/wp-content/uploads/2020/04/Tiger-I-feat-1100x500.jpg"
     },
     {
         nombre: "T-34",
         tipo: "tanque de guerra",
         descripcion: "Tanque soviético clave en la Segunda Guerra Mundial",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/1/17/T34-85-latrun-2.jpg"
+        imagen: "https://tankmuseum.org/wp-content/uploads/2020/11/T-34-76-Featured.jpg"
     },
     {
         nombre: "M4 Sherman",
         tipo: "tanque de guerra",
         descripcion: "Tanque medio usado por EE.UU.",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0c/M4_Sherman_tank.jpg"
+        imagen: "https://tankmuseum.org/wp-content/uploads/2020/06/M4A1-Sherman.png"
     },
     {
         nombre: "Leopard 2",
         tipo: "tanque de guerra",
         descripcion: "Tanque moderno alemán",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5e/Leopard_2_A5_der_Bundeswehr.jpg"
+        imagen: "https://knds.com/_next/image?url=https%3A%2F%2Fknds.com%2Fmedia%2FLeopard_2_A6_KMW_001_a95da2f973.jpg&w=3840&q=75"
     },
     {
         nombre: "M1 Abrams",
         tipo: "tanque de guerra",
         descripcion: "Tanque moderno estadounidense",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/2/27/M1A1_Abrams.jpg"
+        imagen: "https://static.wikia.nocookie.net/featteca/images/a/a3/Abrams-tank.png/revision/latest/scale-to-width-down/1200?cb=20250501165708&path-prefix=es"
     },
     {
         nombre: "Challenger 2",
         tipo: "tanque de guerra",
         descripcion: "Tanque británico moderno",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/7/77/Challenger_2_Tank.jpg"
+        imagen: "https://i0.wp.com/www.zona-militar.com/wp-content/uploads/2025/01/Ukrainian-Challenger-2-called-Baby-251124-CREDIT-Ukrainian-MOD-1.jpg?fit=1920%2C1080&ssl=1"
     },
     {
         nombre: "Leclerc",
         tipo: "tanque de guerra",
         descripcion: "Tanque francés con sistema automático",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/d/d6/Leclerc_tank_2015.jpg"
+        imagen: "https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/3/35362/35362_1.jpg"
     },
     {
         nombre: "T-90",
         tipo: "tanque de guerra",
         descripcion: "Tanque ruso moderno",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0f/T-90_tank.JPG"
+        imagen: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/2013_Moscow_Victory_Day_Parade_%2828%29.jpg/1280px-2013_Moscow_Victory_Day_Parade_%2828%29.jpg"
     },
     {
         nombre: "Merkava Mk 4",
         tipo: "tanque de guerra",
         descripcion: "Tanque israelí",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/c/cd/Merkava_Mk_4.jpg"
+        imagen: "https://cdn.vozpopuli.com/cdn/posts/2795621/articulos-2312413-1200x700.jpg"
     },
     {
         nombre: "Type 99",
         tipo: "tanque de guerra",
         descripcion: "Tanque chino moderno",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3b/Type_99_tank.jpg"
+        imagen: "https://www.revistaejercitos.com/wp-content/uploads/2020/03/7070332d9a361f724af4e8127a9d53b9.jpg"
     },
 
     // 💧 AGUA (5)
@@ -69,65 +69,65 @@ const data = [
         nombre: "Tanque Elevado Municipal",
         tipo: "agua",
         descripcion: "Tanque elevado para distribución de agua potable",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Water_tower.jpg"
+        imagen: "https://muniguatealfrente.com/wp-content/uploads/WhatsApp-Image-2025-04-25-at-2.30.40-PM.jpeg"
     },
     {
         nombre: "Reservorio Cilíndrico",
         tipo: "agua",
         descripcion: "Almacenamiento industrial de agua",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Water_storage_tanks.jpg"
+        imagen: "https://thumbs.dreamstime.com/b/large-water-storage-tank-garden-green-plastic-setting-flowers-foreground-105060796.jpg"
     },
     {
         nombre: "Tanque Subterráneo",
         tipo: "agua",
         descripcion: "Sistema de almacenamiento bajo tierra",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Underground_water_tank.jpg"
+        imagen: "https://img.magnific.com/free-photo/huge-plastic-tank-water-isolated-white_93675-135238.jpg?semt=ais_hybrid&w=740&q=80"
     },
     {
         nombre: "Tanque Rural",
         tipo: "agua",
         descripcion: "Uso agrícola y rural",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/1/1b/Farm_water_tank.jpg"
+        imagen: "https://thumbs.dreamstime.com/b/un-tanque-r%C3%BAstico-de-agua-hormig%C3%B3n-rural-en-el-campo-una-granja-finca-cercana-al-pueblo-arcabuco-las-monta%C3%B1as-andinas-centrales-220331885.jpg"
     },
     {
         nombre: "Tanque Fibra de Vidrio",
         tipo: "agua",
         descripcion: "Tanque doméstico resistente",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/8/84/Plastic_water_tank.jpg"
+        imagen: "https://www.plaremesa.net/wp-content/uploads/2019/10/tanques-de-agua-en-fibra-de-vidrio.jpg"
     },
-
 
     {
         nombre: "Tanque LPG Horizontal",
         tipo: "gas",
         descripcion: "Gas licuado industrial",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/5/5d/LPG_tank.jpg"
+        imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxJVsZsPSUsYGNW-0b96NUPMe9Tsq2DVC2QA&s"
     },
     {
         nombre: "Tanque Esférico",
         tipo: "gas",
         descripcion: "Uso petroquímico",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/3/3c/Spherical_gas_tank.jpg"
+        imagen: "https://tatsa.mx/wp-content/uploads/2023/01/recipientes-esfe204129ricos-2.webp"
     },
     {
         nombre: "Tanque Criogénico",
         tipo: "gas",
         descripcion: "Gases a baja temperatura",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/e/e5/Cryogenic_tank.jpg"
+        imagen: "https://airgasnoticias.com/images/Tanque_criogenico.jpg"
     },
     {
         nombre: "Tanque Vertical Gas Natural",
         tipo: "gas",
         descripcion: "Almacenamiento de gas natural",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/4/4c/Gas_storage_tank.jpg"
+        imagen: "https://lh5.googleusercontent.com/proxy/oIADUHCmn3E3ZyG2dolLwgqxjZEh0784qanpgkMGwk4qFqZFkyhZnw3SNd7FuF4fIVWg-Yfnl8OKkTvgzZ6mVtMcCr9bjDr7FWENMzRS6dFzsnFjEIBqGp2eZmPv"
     },
     {
         nombre: "Tanque de Propano",
         tipo: "gas",
         descripcion: "Uso doméstico e industrial",
-        imagen: "https://upload.wikimedia.org/wikipedia/commons/7/72/Propane_tank.jpg"
+        imagen: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqDu3euU80ISXS5Hu4zhG2Kew9k7MOamReQA&s"
     }
 ]
+
 
 async function main() {
     try {
