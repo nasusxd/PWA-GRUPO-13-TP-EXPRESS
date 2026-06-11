@@ -96,7 +96,8 @@ router.get("/tanques", async (req, res, next) => {
            id: true,
             nombre: true,
             tipo: true,
-            descripcion: true
+            descripcion: true,
+            imagen: true
         },
         where: {
             ...(search && {
