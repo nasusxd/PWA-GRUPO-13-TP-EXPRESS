@@ -193,6 +193,7 @@ router.get("/tanques/:id", async (req, res, next) => {
         error.status = 404;
         throw error;
     }
+
     res.status(200).json({
     data: tanque
     });
@@ -209,8 +210,10 @@ router.post("/tanques", async (req, res, next) => {
             error: errores
         });
     }
+
+    const {nombre, tipo, descripcion, imagen} = req.body;
     const tanque = await prisma.tanque.create({
-            data: req.body
+            data: {nombre, tipo, descripcion, imagen}
         });
         res.status(201).json({
             data: tanque
@@ -239,9 +242,11 @@ router.put("/tanques/:id", async (req, res, next) => {
             error: errores
         });
     }
+
+    const {nombre, tipo, descripcion, imagen} = req.body;
     const tanque = await prisma.tanque.update({
         where: { id },
-        data: req.body
+        data: {nombre, tipo, descripcion, imagen}
     });
     res.status(200).json({
             data: tanque
