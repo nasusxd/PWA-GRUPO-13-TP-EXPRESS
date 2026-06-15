@@ -1,7 +1,8 @@
 import { Router } from 'express'
-import prisma from './lib/prisma.js'
-import validarTanque from './validations/validarTanque.js'
-
+import prisma from '../lib/prisma.js'
+import validarTanque from '../validations/validarTanque.js'
+import { auth } from '../middlewares/authMiddleware.js'
+import { tanqueService } from '../services/tanqueService.js'
 const router = Router();
 
 /**
@@ -88,34 +89,10 @@ const router = Router();
  *         description: Faltan campos obligatorios
  */
 
-router.get("/tanques", async (req, res, next) => {
+router.get("/tanques", auth(['user']), async (req, res, next) => {
     try {
-    const { search, tipo, page = 1, limit = 10 } = req.query;
-    const tanques = await prisma.tanque.findMany({
-        select: {
-           id: true,
-            nombre: true,
-            tipo: true,
-            descripcion: true,
-            imagen: true
-        },
-        where: {
-            ...(search && {
-                nombre: {
-                    contains: search,
-                    mode: "insensitive"
-                }
-            }),
-            ...(tipo && {
-                tipo: tipo
-            })
-        },
-        skip: (Number(page) - 1) * Number(limit),
-        take: Number(limit)
-    });
-    res.status(200).json({
-        data: tanques
-    });
+        const getAll = await tanqueService.getAll(req.query.search, req.query.tipo, req.query.page, req.query.limit)
+        res.status(200).json({ data: getAll });
     }catch (error) {
         next(error);
     }
@@ -181,98 +158,64 @@ router.get("/tanques", async (req, res, next) => {
  *         description: Tanque no encontrado
  */
 
-router.get("/tanques/:id", async (req, res, next) => {
+router.get("/tanques/:id", auth(['user']), async (req, res, next) => {
     try {
-    const id = Number(req.params.id);
-    if (isNaN(id)) { return res.status(400).json({ error: "ID inválido" });}
-    const tanque = await prisma.tanque.findUnique({
-        where: { id }
-    });
-    if (!tanque) {
-        const error = new Error("Tanque no encontrado");
-        error.status = 404;
-        throw error;
-    }
-
-    res.status(200).json({
-    data: tanque
-    });
-    }
-    catch (error) {
-    next(error);
-}});
-
-router.post("/tanques", async (req, res, next) => {
-    try {
-    const errores = validarTanque(req.body);
-    if (errores.length > 0) {
-        return res.status(400).json({
-            error: errores
-        });
-    }
-
-    const {nombre, tipo, descripcion, imagen} = req.body;
-    const tanque = await prisma.tanque.create({
-            data: {nombre, tipo, descripcion, imagen}
-        });
-        res.status(201).json({
-            data: tanque
-        });
+        const id = Number(req.params.id);
+        if (isNaN(id)) { return res.status(400).json({ error: "ID inválido" });}
+        const tanque = await tanqueService.getById(id);
+        res.status(200).json({ data: tanque });
     }
     catch (error) {
         next(error);
     }
 });
 
-router.put("/tanques/:id", async (req, res, next) => {
+router.post("/tanques", auth(['admin']), async (req, res, next) => {
+    try {
+        const errores = validarTanque(req.body);
+        if (errores.length > 0) {
+            return res.status(400).json({ error: errores });
+        }
+
+        const {nombre, tipo, descripcion, imagen} = req.body;
+        const tanque = await tanqueService.create(nombre, tipo, descripcion, imagen);
+        res.status(201).json({ data: tanque });
+    }
+    catch (error) {
+        next(error);
+    }
+});
+
+router.put("/tanques/:id", auth(['admin']), async (req, res, next) => {
     try{
         const id = Number(req.params.id);
-        if (isNaN(id)) { return res.status(400).json({ error: "ID Inexistente"});}
-        const existeTanque = await prisma.tanque.findUnique({
-        where: { id}
-    });
-    if (!existeTanque) {
-        const error = new Error("Tanque no encontrado");
-        error.status = 404;
-        throw error;
-    }
-    const errores = validarTanque(req.body);
-    if (errores.length > 0) {
-        return res.status(400).json({
-            error: errores
-        });
-    }
+        if (isNaN(id)) { 
+            return res.status(400).json({ error: "ID Inexistente"})
+        };
 
-    const {nombre, tipo, descripcion, imagen} = req.body;
-    const tanque = await prisma.tanque.update({
-        where: { id },
-        data: {nombre, tipo, descripcion, imagen}
-    });
-    res.status(200).json({
-            data: tanque
-        });
+        const errores = validarTanque(req.body);
+        if (errores.length > 0) {
+            return res.status(400).json({ error: errores });
+        }
+
+        const {nombre, tipo, descripcion, imagen} = req.body;
+        const tanque = await tanqueService.update(id, nombre, tipo, descripcion, imagen);
+        res.status(200).json({data: tanque });
     }
     catch (error) {
         next(error);
-}
+    }
 });
 
-router.delete("/tanques/:id", async (req, res, next) => {
+router.delete("/tanques/:id", auth(['admin']), async (req, res, next) => {
     try {
         const id = Number(req.params.id);
-        if (isNaN(id)) { return res.status(400).json({ error: "ID Inexistente" });}
-        const existeTanque = await prisma.tanque.findUnique({
-        where: { id }
-    });
-    if (!existeTanque) {
-        const error = new Error("Tanque no encontrado");
-        error.status = 404;
-        throw error;
-    }
-    await prisma.tanque.delete({
-        where: { id }
-    });
-    res.status(204).send();
+        if (isNaN(id)) { 
+            return res.status(400).json({ error: "ID Inexistente"})
+        };
+        
+        await tanqueService.delete(id);
+        res.status(204).send();
     }
     catch (error) {
         next(error);
