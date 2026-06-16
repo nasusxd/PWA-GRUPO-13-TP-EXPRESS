@@ -15,4 +15,27 @@ model Tanque {
   imagen     String?
   creadoEn     DateTime @default(now())
   modificadoEn DateTime @updatedAt
+  favoritos  Favorito[]
+}
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  password     String
+  nombre       String
+  rol          String   @default("user")
+  creadoEn     DateTime @default(now())
+  favoritos  Favorito[]
+}
+
+model Favorito {
+  id         Int      @id @default(autoincrement())
+  usuarioId  Int
+  tanqueId   Int
+  creadoEn   DateTime @default(now())
+
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  tanque     Tanque   @relation(fields: [tanqueId], references: [id])
+
+  @@unique([usuarioId, tanqueId]) // evita duplicados
 }
