@@ -16,6 +16,8 @@ app.use(cors({
 
 app.use(express.json())
 app.use('/', routes);
+app.use('/auth', authRoutes);
+
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(especificaciones, {
     customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.min.css',
     customJs: [

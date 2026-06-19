@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express'
 import { AppError } from '../utils/error.js'
 import { authService } from '../services/authService.js'
+import { auth } from '../middlewares/authMiddleware.js'
 
 const router = Router()
 
@@ -41,6 +42,15 @@ router.post('/register', async (req, res, next) => {
         next(error)
     }
 })
+
+router.get ('/me', auth(), async(req, res, next)=> {
+    try {
+        const userInfo = await authService.getUserInfo(req.user.id)
+        res.status(200).json({ data: userInfo })
+    } catch (error) {
+        next(error)
+    }
+} )
 
 router.post('/refresh-token', async (req, res, next) => {
     const refreshToken = req.cookies.refreshToken

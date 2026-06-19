@@ -30,6 +30,14 @@ export const authService = {
 
         return { userId: nuevoUser.id }
     },
+    getUserInfo: async (userId) => {
+        const user = await prisma.usuario.findUnique({ 
+            where: { id: userId },
+            select: { id: true, nombre: true, email: true, rol: true }
+        })
+
+        return user
+    },
 
     refreshToken: async (refreshToken) => {
        const decoded = jwt.verify(refreshToken, process.env.JWT_REFRESH_SECRET)
