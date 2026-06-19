@@ -25,6 +25,7 @@ model Usuario {
   nombre       String
   rol          String   @default("user")
   creadoEn     DateTime @default(now())
+  modificadoEn DateTime @updatedAt
   favoritos  Favorito[]
 }
 
