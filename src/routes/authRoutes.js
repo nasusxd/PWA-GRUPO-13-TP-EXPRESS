@@ -1,12 +1,16 @@
-import { Router, Request, Response, NextFunction } from 'express'
+import { Router } from 'express'
 import { AppError } from '../utils/error.js'
 import { authService } from '../services/authService.js'
 import { auth } from '../middlewares/authMiddleware.js'
+import { validarRegister, validarLogin } from '../validations/validarAuth.js'
 
 const router = Router()
 
 router.post('/login', async (req, res, next) => {
     try {
+        const errores = validarLogin(req.body)
+        if (errores.length > 0) return next(new AppError(errores.join(', '), 400))
+
         const {token, refreshToken, nombre} = await authService.login(req.body.email, req.body.password)
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
@@ -33,6 +37,9 @@ router.post('/logout', (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
     try {
+        const errores = validarRegister(req.body)
+        if (errores.length > 0) return next(new AppError(errores.join(', '), 400))
+
         const data = await authService.register(req.body.email, req.body.password, req.body.nombre)
         res.status(201).json({
             message: 'Usuario registrado correctamente',

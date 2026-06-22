@@ -1,5 +1,8 @@
 import express from 'express'
-import routes from './routes.js'
+import cookieParser from 'cookie-parser'
+import routes from './routes/routes.js'
+import authRoutes from './routes/authRoutes.js'
+import favoritesRoutes from './routes/favoritesRoutes.js'
 import dotenv from 'dotenv'
 import cors from 'cors'
 import middleswareError from './middlewares/middlewareError.js'
@@ -15,8 +18,10 @@ app.use(cors({
 }));
 
 app.use(express.json())
+app.use(cookieParser())
 app.use('/', routes);
 app.use('/auth', authRoutes);
+app.use('/favorites', favoritesRoutes);
 
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(especificaciones, {
     customCssUrl: 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/5.17.14/swagger-ui.min.css',
