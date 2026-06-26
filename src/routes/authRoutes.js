@@ -11,7 +11,7 @@ router.post('/login', async (req, res, next) => {
         const errores = validarLogin(req.body)
         if (errores.length > 0) return next(new AppError(errores.join(', '), 400))
 
-        const {token, refreshToken, nombre} = await authService.login(req.body.email, req.body.password)
+        const {token, refreshToken, user} = await authService.login(req.body.email, req.body.password)
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
@@ -19,7 +19,7 @@ router.post('/login', async (req, res, next) => {
             path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
-        res.status(200).json({ message: `bienvenido ${nombre}`, token})
+        res.status(200).json({ message: `bienvenido ${user.nombre}`, token, user})
     } catch (error) {
         next(error)
     }

@@ -16,7 +16,7 @@ export const authService = {
         const token = jwt.sign(info, process.env.JWT_SECRET, { expiresIn: '2h' })
         const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' })
 
-        return { token, refreshToken, nombre: user.nombre }
+        return { token, refreshToken, user: info }
     },
 
     register: async (email, password, nombre) => {
