@@ -89,7 +89,7 @@ const router = Router();
  *         description: Faltan campos obligatorios
  */
 
-router.get("/tanques", auth(['user']), async (req, res, next) => {
+router.get("/tanques", async (req, res, next) => {
     try {
         const getAll = await tanqueService.getAll(req.query.search, req.query.tipo, req.query.page, req.query.limit)
         res.status(200).json({ data: getAll });
@@ -158,7 +158,7 @@ router.get("/tanques", auth(['user']), async (req, res, next) => {
  *         description: Tanque no encontrado
  */
 
-router.get("/tanques/:id", auth(['user']), async (req, res, next) => {
+router.get("/tanques/:id", async (req, res, next) => {
     try {
         const id = Number(req.params.id);
         if (isNaN(id)) { return res.status(400).json({ error: "ID inválido" });}
@@ -169,6 +169,7 @@ router.get("/tanques/:id", auth(['user']), async (req, res, next) => {
         next(error);
     }
 });
+
 
 router.post("/tanques", auth(['admin']), async (req, res, next) => {
     try {
