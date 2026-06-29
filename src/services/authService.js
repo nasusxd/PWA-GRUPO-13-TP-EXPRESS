@@ -15,7 +15,12 @@ export const authService = {
         const info = { id: user.id, nombre: user.nombre, email: user.email, rol: user.rol }
         const token = jwt.sign(info, process.env.JWT_SECRET, { expiresIn: '2h' })
         const refreshToken = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '7d' })
-
+        
+        await prisma.usuario.update({ 
+            where: { id: user.id }, 
+            data: { refreshToken }
+        })
+        
         return { token, refreshToken, user: info }
     },
 

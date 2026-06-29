@@ -3,7 +3,7 @@ import { AppError } from '../utils/error.js'
 import { authService } from '../services/authService.js'
 import { auth } from '../middlewares/authMiddleware.js'
 import { validarRegister, validarLogin } from '../validations/validarAuth.js'
-
+import prisma from '../lib/prisma.js'
 const router = Router()
 
 router.post('/login', async (req, res, next) => {
@@ -25,14 +25,22 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
-router.post('/logout', (req, res, next) => {
-    res.clearCookie('refreshToken', {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production',
-        sameSite: 'strict',
-        path: '/'
-    })
-    res.status(200).json({ message: 'sesion cerrada correctamente' })
+router.post('/logout', auth(), async (req, res, next) => {
+    try {
+        await prisma.usuario.update({
+            where: { id: req.user.id },
+            data: { refreshToken: null }
+        })
+        res.clearCookie('refreshToken', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            path: '/'
+        })
+        res.status(200).json({ message: 'sesion cerrada correctamente' })
+    } catch (error) {
+        next(error)
+    }
 })
 
 router.post('/register', async (req, res, next) => {
@@ -69,6 +77,7 @@ router.post('/refresh-token', async (req, res, next) => {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
+            path: '/',
             maxAge: 7 * 24 * 60 * 60 * 1000
         })
         res.status(200).json({ accessToken: newAccessToken })

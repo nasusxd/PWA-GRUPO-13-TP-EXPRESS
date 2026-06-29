@@ -24,6 +24,7 @@ model Usuario {
   password     String
   nombre       String
   rol          String   @default("user")
+  refreshToken String?
   creadoEn     DateTime @default(now())
   modificadoEn DateTime @updatedAt
   favoritos  Favorito[]
