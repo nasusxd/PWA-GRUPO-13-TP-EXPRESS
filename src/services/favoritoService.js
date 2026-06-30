@@ -7,7 +7,8 @@ export const favoritoService = {
       where: { usuarioId },
       include: { tanque: true }
     })
-    return favoritos.map(f => ({ id: f.id, creadoEn: f.creadoEn, tanque: f.tanque }))
+
+    return favoritos.map(f => f.tanque)
   },
 
   add: async (usuarioId, tanqueId) => {

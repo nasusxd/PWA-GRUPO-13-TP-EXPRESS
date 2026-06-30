@@ -5,7 +5,7 @@ import { AppError } from '../utils/error.js'
 
 const router = Router()
 
-router.get('/', auth(['user']), async (req, res, next) => {
+router.get('/', auth(['user', 'admin']), async (req, res, next) => {
   try {
     const usuarioId = req.user?.id
     const favoritos = await favoritoService.list(usuarioId)
@@ -15,7 +15,7 @@ router.get('/', auth(['user']), async (req, res, next) => {
   }
 })
 
-router.post('/:id', auth(['user']), async (req, res, next) => {
+router.post('/:id', auth(['user', 'admin']), async (req, res, next) => {
   try {
     const usuarioId = req.user?.id
     const tanqueId = Number(req.params.id)
@@ -28,7 +28,7 @@ router.post('/:id', auth(['user']), async (req, res, next) => {
   }
 })
 
-router.delete('/:id', auth(['user']), async (req, res, next) => {
+router.delete('/:id', auth(['user', 'admin']), async (req, res, next) => {
   try {
     const usuarioId = req.user?.id
     const tanqueId = Number(req.params.id)
